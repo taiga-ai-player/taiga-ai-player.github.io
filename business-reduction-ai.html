@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>企業向け業務削減AI | AI PLAYER FILE</title>
+<meta name="description" content="中小企業向けの業務効率化・自動化支援。資料作成とデータ整理をAIで一気通貫化し、日々の定型業務を削減する。専門知識ゼロからAIで事業を作ってきた実績を、そのまま企業の業務削減に活かす。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="企業向け業務削減AI | AI PLAYER FILE">
+<meta property="og:description" content="資料作成とデータ整理をAIで一気通貫化し、中小企業の定型業務を削減する。">
+<meta property="og:site_name" content="AI PLAYER FILE">
+<meta property="og:locale" content="ja_JP">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;700&family=Teko:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .breadcrumb {
+    padding-top: 28px;
+    font-size: 13px;
+    color: var(--chalk-dim);
+  }
+  .breadcrumb a { color: var(--chalk-dim); text-decoration: none; border-bottom: 1px solid var(--line); }
+  .breadcrumb a:hover { color: var(--amber); border-color: var(--amber-dim); }
+
+  .detail-hero {
+    padding: 28px 0 40px;
+    border-bottom: 1px solid var(--line);
+  }
+  .detail-position {
+    font-family: "Teko", sans-serif;
+    font-size: 15px;
+    letter-spacing: 2px;
+    color: var(--chalk-dim);
+    margin-bottom: 10px;
+  }
+  .detail-hero h1 {
+    font-family: "Zen Kaku Gothic New", sans-serif;
+    font-weight: 900;
+    font-size: clamp(26px, 5vw, 38px);
+    line-height: 1.4;
+    margin: 0 0 14px;
+    color: var(--chalk);
+  }
+  .detail-tagline {
+    font-size: 15px;
+    color: var(--chalk-dim);
+    line-height: 1.8;
+    max-width: 560px;
+    margin: 0 0 24px;
+  }
+  .tag-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+  }
+  .tag {
+    font-size: 12px;
+    padding: 5px 12px;
+    border-radius: 20px;
+    background: rgba(232,163,61,0.12);
+    color: var(--amber);
+    border: 1px solid var(--amber-dim);
+  }
+  .status-box {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 12px 20px;
+    font-size: 13px;
+    color: var(--chalk-dim);
+  }
+  .status-box b { color: var(--amber); font-weight: 700; }
+
+  /* FLOW */
+  .flow-row {
+    display: flex;
+    align-items: stretch;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin: 8px 0 28px;
+  }
+  .flow-box {
+    flex: 1;
+    min-width: 160px;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 18px 16px;
+    font-size: 13.5px;
+    color: var(--chalk);
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1.6;
+  }
+  .flow-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--amber);
+    font-size: 20px;
+    flex-shrink: 0;
+    width: 24px;
+  }
+  @media (max-width: 640px) {
+    .flow-row { flex-direction: column; }
+    .flow-arrow { transform: rotate(90deg); width: auto; padding: 4px 0; }
+  }
+
+  .list-plain {
+    margin: 0 0 8px;
+    padding: 0;
+    list-style: none;
+  }
+  .list-plain li {
+    font-size: 13.5px;
+    color: var(--chalk-dim);
+    line-height: 1.9;
+    padding-left: 18px;
+    position: relative;
+    margin-bottom: 6px;
+  }
+  .list-plain li::before {
+    content: "・";
+    position: absolute;
+    left: 0;
+    color: var(--amber);
+  }
+
+  /* PROOF ROSTER (小型カード) */
+  .proof-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  @media (max-width: 720px) {
+    .proof-grid { grid-template-columns: 1fr; }
+  }
+  .proof-card {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 20px;
+  }
+  .proof-num {
+    font-family: "Teko", sans-serif;
+    font-size: 22px;
+    color: var(--amber);
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .proof-card h4 {
+    font-family: "Zen Kaku Gothic New", sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    margin: 0 0 8px;
+    color: var(--chalk);
+  }
+  .proof-card p {
+    font-size: 13px;
+    color: var(--chalk-dim);
+    line-height: 1.8;
+    margin: 0 0 10px;
+  }
+  .proof-card a {
+    font-size: 12px;
+    color: var(--amber);
+    text-decoration: none;
+    border-bottom: 1px solid var(--amber-dim);
+  }
+  .proof-card a:hover { color: var(--chalk); border-color: var(--chalk-dim); }
+  .proof-quote {
+    margin-top: 20px;
+    font-size: 13.5px;
+    color: var(--amber);
+    font-style: italic;
+    line-height: 1.8;
+  }
+
+  /* STEPS */
+  .step-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  @media (max-width: 720px) {
+    .step-grid { grid-template-columns: 1fr; }
+  }
+  .step-card {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 22px;
+  }
+  .step-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--clay);
+    color: var(--chalk);
+    font-family: "Teko", sans-serif;
+    font-weight: 700;
+    font-size: 17px;
+    margin-bottom: 12px;
+  }
+  .step-card h4 {
+    font-family: "Zen Kaku Gothic New", sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    margin: 0 0 8px;
+    color: var(--chalk);
+  }
+  .step-card p {
+    font-size: 13px;
+    color: var(--chalk-dim);
+    line-height: 1.8;
+    margin: 0;
+  }
+
+  /* PRICE TABLE */
+  .price-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+  }
+  .price-table th {
+    text-align: left;
+    background: var(--turf-2);
+    color: var(--amber);
+    font-weight: 700;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    font-size: 13px;
+  }
+  .price-table td {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--line);
+    color: var(--chalk-dim);
+    vertical-align: top;
+  }
+  .price-table tr:last-child td { border-bottom: none; }
+  .price-table td.plan { color: var(--chalk); font-weight: 700; white-space: nowrap; }
+  .price-table td.price { color: var(--amber); font-weight: 700; white-space: nowrap; }
+  .price-note {
+    font-size: 11.5px;
+    color: var(--chalk-dim);
+    margin-top: 12px;
+  }
+
+  /* CONTACT */
+  .contact-box {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 24px;
+    flex-wrap: wrap;
+  }
+  .contact-photo {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: var(--turf-2);
+    border: 2px solid var(--amber-dim);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Zen Kaku Gothic New", sans-serif;
+    font-size: 20px;
+    font-weight: 900;
+    color: var(--amber);
+  }
+  .contact-names { font-size: 13.5px; color: var(--chalk-dim); line-height: 1.9; }
+  .contact-names b { color: var(--chalk); font-weight: 700; }
+
+  .cta-final {
+    padding: 48px 0 64px;
+    text-align: center;
+  }
+  .buy-btn {
+    display: inline-block;
+    background: var(--amber);
+    color: var(--turf);
+    font-weight: 700;
+    font-size: 15px;
+    padding: 16px 40px;
+    border-radius: 6px;
+    text-decoration: none;
+  }
+  .buy-btn:hover { background: var(--chalk); }
+  .cta-final .note { font-size: 12px; color: var(--chalk-dim); margin-top: 14px; }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <div class="breadcrumb"><a href="index.html">AI PLAYER FILE</a> / 企業向け業務削減AI</div>
+
+  <!-- HERO -->
+  <div class="detail-hero">
+    <div class="detail-position">捕手 / キャッチャー</div>
+    <h1>企業向け業務削減AI</h1>
+    <p class="detail-tagline">中小企業向けの業務効率化・自動化支援。資料作成とデータ整理をAIで一気通貫化し、日々の定型業務を削減する。「情報を集めて整理する」「それを資料にする」という一連の業務を、まとめて巻き取る。</p>
+
+    <div class="tag-row">
+      <span class="tag">業界不問・中小企業向け</span>
+      <span class="tag">資料作成特化</span>
+      <span class="tag">データ整理・集計</span>
+      <span class="tag">業務自動化</span>
+    </div>
+
+    <div class="status-box">
+      <b>お試し導入受付中</b> — まずは1件、実際の資料作成・データ整理をお試しいただけます
+    </div>
+  </div>
+
+  <!-- サービス内容 -->
+  <div class="section">
+    <div class="section-head">
+      <span class="section-num">01</span>
+      <h2>サービス内容</h2>
+    </div>
+    <p class="section-desc">散在するデータの整理から、報告書・資料としてまとめる工程までを一連の流れとしてAIで自動化・効率化する。</p>
+
+    <div class="flow-row">
+      <div class="flow-box">散在するデータ<br>(Excel・紙・メール)</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box">AIで整理・集計</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box">報告書・資料として<br>自動作成</div>
+    </div>
+
+    <ul class="list-plain">
+      <li>報告書・議事録・提案書などの自動作成(雛形化・自動生成)</li>
+      <li>Excel・スプレッドシートに散らばったデータの整理・集計の自動化</li>
+      <li>定型書類(見積書・請求書等)作成の効率化</li>
+      <li>メール対応・問い合わせ対応の下書き自動化</li>
+      <li>SNS発信・広告文の作成代行</li>
+      <li>データ入力・集計作業の自動化</li>
+      <li>必要に応じて、社内マニュアル・FAQの整備支援</li>
+    </ul>
+
+    <p class="detail-tagline" style="margin-top:20px;">
+      特定の業界には絞らず、<b style="color:var(--chalk)">幅広い中小企業</b>を対象にご提案しています。まずは「資料作成」を看板の切り口として、そこから業務範囲を広げていく方針です。
+    </p>
+
+    <div class="status-box" style="margin-top:4px;">
+      <b>AIコンサルとの違い</b> — コンサルが「AIの使い方を教える・伴走する」立場なら、こちらは「実際に業務削減の仕組みを作って納品する」実務寄りのサービスです
+    </div>
+  </div>
+
+  <!-- 実績 -->
+  <div class="section">
+    <div class="section-head">
+      <span class="section-num">02</span>
+      <h2>実績・実例(AI活用の証明)</h2>
+    </div>
+    <p class="section-desc">専門知識ゼロの状態から、AIを活用して複数の事業の土台を実際に構築してきた実績。</p>
+
+    <div class="proof-grid">
+      <div class="proof-card">
+        <div class="proof-num">01</div>
+        <h4>デジタルレシピ本</h4>
+        <p>制作・販売の仕組みをAIで構築。PDF試作版14ページ完成。</p>
+        <a href="recipe-book.html">詳しく見る →</a>
+      </div>
+      <div class="proof-card">
+        <div class="proof-num">02</div>
+        <h4>動画編集委託</h4>
+        <p>AI活用による委託・効率化の仕組みを構築。台本作成代行に絞り込み済み。</p>
+        <a href="video-edit.html">詳しく見る →</a>
+      </div>
+      <div class="proof-card">
+        <div class="proof-num">03</div>
+        <h4>ブランドサイト</h4>
+        <p>このサイト自体もAIで企画・構築し公開中。</p>
+        <a href="index.html">トップページへ →</a>
+      </div>
+    </div>
+
+    <p class="proof-quote">「専門知識がなくても、AIを正しく使えば業務の仕組みを構築できる」ことを自ら実証した事例です。</p>
+  </div>
+
+  <!-- 進め方 -->
+  <div class="section">
+    <div class="section-head">
+      <span class="section-num">03</span>
+      <h2>進め方</h2>
+    </div>
+    <p class="section-desc">大きな契約からではなく、まずは小さく始めて効果を確認いただく形で進める。</p>
+
+    <div class="step-grid">
+      <div class="step-card">
+        <div class="step-badge">1</div>
+        <h4>お試し導入</h4>
+        <p>まずは1件、実際の資料作成・データ整理を体験。効果を数値・時間で可視化。</p>
+      </div>
+      <div class="step-card">
+        <div class="step-badge">2</div>
+        <h4>仕組み化</h4>
+        <p>効果を確認した業務を、テンプレート・自動化フローとして構築(初期構築)。</p>
+      </div>
+      <div class="step-card">
+        <div class="step-badge">3</div>
+        <h4>運用・拡張</h4>
+        <p>月額プランで継続運用。効果を見ながら対象業務を順次拡大。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 料金 -->
+  <div class="section">
+    <div class="section-head">
+      <span class="section-num">04</span>
+      <h2>料金プラン</h2>
+    </div>
+    <p class="section-desc">まずは低価格の「お試し」からご案内。効果を確認いただいた上で、初期構築・月額運用へ。</p>
+
+    <table class="price-table">
+      <tr><th>プラン</th><th>内容</th><th>価格目安</th></tr>
+      <tr>
+        <td class="plan">お試し<br>(単発)</td>
+        <td>報告書・提案書などの資料作成、または散在データの整理を1件、実演形式で納品</td>
+        <td class="price">20,000円〜</td>
+      </tr>
+      <tr>
+        <td class="plan">初期構築</td>
+        <td>現状の業務フローをヒアリングし、テンプレート・自動化の仕組みを設計・構築</td>
+        <td class="price">50,000〜150,000円</td>
+      </tr>
+      <tr>
+        <td class="plan">ライト<br>(月額)</td>
+        <td>月1〜2件の資料作成・簡易データ集計を巻き取り、運用</td>
+        <td class="price">30,000〜50,000円/月</td>
+      </tr>
+      <tr>
+        <td class="plan">スタンダード<br>(月額)</td>
+        <td>定例レポートの自動作成+データ整理の仕組み運用+月次調整</td>
+        <td class="price">60,000〜80,000円/月</td>
+      </tr>
+      <tr>
+        <td class="plan">プロ<br>(月額)</td>
+        <td>複数業務ラインの自動化+社内展開・運用サポート</td>
+        <td class="price">100,000円〜/月</td>
+      </tr>
+    </table>
+    <p class="price-note">※上記は目安です。業務範囲・データ量・対応頻度により調整いたします。</p>
+  </div>
+
+  <!-- 問い合わせ -->
+  <div class="section">
+    <div class="section-head">
+      <span class="section-num">05</span>
+      <h2>提案している人</h2>
+    </div>
+    <div class="contact-box">
+      <div class="contact-photo">タ</div>
+      <div class="contact-names">
+        <b>タイガ | 野球からAIへ</b><br>
+        連絡先: tanamatuku0512@icloud.com
+      </div>
+    </div>
+  </div>
+
+  <!-- FINAL CTA -->
+  <div class="cta-final">
+    <a class="buy-btn" href="mailto:tanamatuku0512@icloud.com">お試し導入について相談する</a>
+    <div class="note">まずはお試しプランから、お気軽にご相談ください</div>
+  </div>
+
+</div>
+
+</body>
+</html>
