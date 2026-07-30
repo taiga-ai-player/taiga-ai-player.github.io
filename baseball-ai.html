@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>野球へのAI導入 | AI PLAYER FILE</title>
+<meta name="description" content="少年野球から大学野球まで、AIで練習メニュー作成・成績管理・動画分析・保護者連絡を効率化。元野球少年が自身の原点を武器に提案するAI活用支援。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="野球へのAI導入 | AI PLAYER FILE">
+<meta property="og:description" content="小学校から大学まで、AIで練習メニュー・成績管理・動画分析・保護者連絡を効率化する。">
+<meta property="og:site_name" content="AI PLAYER FILE">
+<meta property="og:locale" content="ja_JP">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;700&family=Teko:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .breadcrumb {
+    padding-top: 28px;
+    font-size: 13px;
+    color: var(--chalk-dim);
+  }
+  .breadcrumb a { color: var(--chalk-dim); text-decoration: none; border-bottom: 1px solid var(--line); }
+  .breadcrumb a:hover { color: var(--amber); border-color: var(--amber-dim); }
+
+  .detail-hero {
+    padding: 28px 0 40px;
+    border-bottom: 1px solid var(--line);
+  }
+  .detail-position {
+    font-family: "Teko", sans-serif;
+    font-size: 15px;
+    letter-spacing: 2px;
+    color: var(--chalk-dim);
+    margin-bottom: 10px;
+  }
+  .detail-hero h1 {
+    font-family: "Zen Kaku Gothic New", sans-serif;
+    font-weight: 900;
+    font-size: clamp(26px, 5vw, 38px);
+    line-height: 1.4;
+    margin: 0 0 14px;
+    color: var(--chalk);
+  }
+  .detail-tagline {
+    font-size: 15px;
+    color: var(--chalk-dim);
+    line-height: 1.8;
+    max-width: 560px;
+    margin: 0 0 24px;
+  }
+  .tag-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+  }
+  .tag {
+    font-size: 12px;
+    padding: 5px 12px;
+    border-radius: 20px;
+    background: rgba(232,163,61,0.12);
+    color: var(--amber);
+    border: 1px solid var(--amber-dim);
+  }
+  .status-box {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 12px 20px;
+    font-size: 13px;
+    color: var(--chalk-dim);
+  }
+  .status-box b { color: var(--amber); font-weight: 700; }
+
+  /* SERVICE GRID (4本柱) */
+  .service-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  @media (max-width: 640px) {
+    .service-grid { grid-template-columns: 1fr; }
+  }
+  .service-card {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 22px;
+  }
+  .service-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--clay);
+    color: var(--chalk);
+    font-family: "Teko", sans-serif;
+    font-weight: 700;
+    font-size: 17px;
+    margin-bottom: 12px;
+  }
+  .service-card h4 {
+    font-family: "Zen Kaku Gothic New", sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    margin: 0 0 8px;
+    color: var(--chalk);
+  }
+  .service-card p {
+    font-size: 13px;
+    color: var(--chalk-dim);
+    line-height: 1.8;
+    margin: 0;
+  }
+
+  /* TARGET RANGE */
+  .range-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin: 8px 0 28px;
+  }
+  .range-box {
+    flex: 1;
+    min-width: 110px;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 16px;
+    text-align: center;
+    font-size: 13.5px;
+    color: var(--chalk);
+  }
+  .range-arrow {
+    color: var(--amber);
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  @media (max-width: 640px) {
+    .range-row { flex-direction: column; }
+    .range-arrow { transform: rotate(90deg); }
+  }
+
+  /* PROOF ROSTER */
+  .proof-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  @media (max-width: 720px) {
+    .proof-grid { grid-template-columns: 1fr; }
+  }
+  .proof-card {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 20px;
+  }
+  .proof-num {
+    font-family: "Teko", sans-serif;
+    font-size: 22px;
+    color: var(--amber);
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .proof-card h4 {
+    font-family: "Zen Kaku Gothic New", sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    margin: 0 0 8px;
+    color: var(--chalk);
+  }
+  .proof-card p {
+    font-size: 13px;
+    color: var(--chalk-dim);
+    line-height: 1.8;
+    margin: 0 0 10px;
+  }
+  .proof-card a {
+    font-size: 12px;
+    color: var(--amber);
+    text-decoration: none;
+    border-bottom: 1px solid var(--amber-dim);
+  }
+  .proof-card a:hover { color: var(--chalk); border-color: var(--chalk-dim); }
+  .proof-quote {
+    margin-top: 20px;
+    font-size: 13.5px;
+    color: var(--amber);
+    font-style: italic;
+    line-height: 1.8;
+  }
+
+  /* STEPS */
+  .step-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  @media (max-width: 720px) {
+    .step-grid { grid-template-columns: 1fr; }
+  }
+  .step-card {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 22px;
+  }
+  .step-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--clay);
+    color: var(--chalk);
+    font-family: "Teko", sans-serif;
+    font-weight: 700;
+    font-size: 17px;
+    margin-bottom: 12px;
+  }
+  .step-card h4 {
+    font-family: "Zen Kaku Gothic New", sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    margin: 0 0 8px;
+    color: var(--chalk);
+  }
+  .step-card p {
+    font-size: 13px;
+    color: var(--chalk-dim);
+    line-height: 1.8;
+    margin: 0;
+  }
+
+  /* CONTACT */
+  .contact-box {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 24px;
+    flex-wrap: wrap;
+  }
+  .contact-photo {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: var(--turf-2);
+    border: 2px solid var(--amber-dim);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Zen Kaku Gothic New", sans-serif;
+    font-size: 20px;
+    font-weight: 900;
+    color: var(--amber);
+  }
+  .contact-names { font-size: 13.5px; color: var(--chalk-dim); line-height: 1.9; }
+  .contact-names b { color: var(--chalk); font-weight: 700; }
+
+  .cta-final {
+    padding: 48px 0 64px;
+    text-align: center;
+  }
+  .buy-btn {
+    display: inline-block;
+    background: var(--amber);
+    color: var(--turf);
+    font-weight: 700;
+    font-size: 15px;
+    padding: 16px 40px;
+    border-radius: 6px;
+    text-decoration: none;
+  }
+  .buy-btn:hover { background: var(--chalk); }
+  .cta-final .note { font-size: 12px; color: var(--chalk-dim); margin-top: 14px; }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <div class="breadcrumb"><a href="index.html">AI PLAYER FILE</a> / 野球へのAI導入</div>
+
+  <!-- HERO -->
+  <div class="detail-hero">
+    <div class="detail-position">先発投手 / エース</div>
+    <h1>野球へのAI導入</h1>
+    <p class="detail-tagline">小学校の少年野球から、中学・高校の部活、大学野球まで。練習メニュー作成、成績管理、動画分析、保護者連絡の自動化をAIで支援する。野球で育った自分自身の原点が、そのまま提案の説得力になる。</p>
+
+    <div class="tag-row">
+      <span class="tag">小学校〜大学対応</span>
+      <span class="tag">練習メニュー作成</span>
+      <span class="tag">成績管理</span>
+      <span class="tag">動画分析</span>
+      <span class="tag">保護者連絡自動化</span>
+    </div>
+
+    <div class="status-box">
+      <b>構想中</b> — 現在は提案の骨組みを整理している段階。価格・提供形態はこれから詰めていく
+    </div>
+  </div>
+
+  <!-- 対象 -->
+  <div class="section">
+    <div class="section-head">
+      <span class="section-num">01</span>
+      <h2>対象</h2>
+    </div>
+    <p class="section-desc">特定のカテゴリーには絞らず、幅広い年代のチームに提案していく方針。</p>
+
+    <div class="range-row">
+      <div class="range-box">少年野球<br>(小学生)</div>
+      <div class="range-arrow">→</div>
+      <div class="range-box">中学部活</div>
+      <div class="range-arrow">→</div>
+      <div class="range-box">高校部活</div>
+      <div class="range-arrow">→</div>
+      <div class="range-box">大学野球</div>
+    </div>
+  </div>
+
+  <!-- サービス内容 -->
+  <div class="section">
+    <div class="section-head">
+      <span class="section-num">02</span>
+      <h2>サービス内容</h2>
+    </div>
+    <p class="section-desc">4つの軸を、チームの状況に合わせて組み合わせて提供する。</p>
+
+    <div class="service-grid">
+      <div class="service-card">
+        <div class="service-badge">1</div>
+        <h4>練習メニュー作成</h4>
+        <p>選手個人の課題やチームの目標に合わせて、AIで練習メニューを提案。</p>
+      </div>
+      <div class="service-card">
+        <div class="service-badge">2</div>
+        <h4>成績管理</h4>
+        <p>打率・投球データなどをAIで整理・可視化し、振り返りやすい形にまとめる。</p>
+      </div>
+      <div class="service-card">
+        <div class="service-badge">3</div>
+        <h4>動画分析</h4>
+        <p>フォームの動画をAIでチェックし、改善ポイントを言語化してフィードバック。</p>
+      </div>
+      <div class="service-card">
+        <div class="service-badge">4</div>
+        <h4>保護者連絡・事務の自動化</h4>
+        <p>練習・試合の連絡、出欠確認などの事務作業をAIで効率化する。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 実績 -->
+  <div class="section">
+    <div class="section-head">
+      <span class="section-num">03</span>
+      <h2>実績・実例(AI活用の証明)</h2>
+    </div>
+    <p class="section-desc">専門知識ゼロの状態から、AIを活用して複数の事業の土台を実際に構築してきた実績。</p>
+
+    <div class="proof-grid">
+      <div class="proof-card">
+        <div class="proof-num">01</div>
+        <h4>デジタルレシピ本</h4>
+        <p>制作・販売の仕組みをAIで構築。PDF試作版14ページ完成。</p>
+        <a href="recipe-book.html">詳しく見る →</a>
+      </div>
+      <div class="proof-card">
+        <div class="proof-num">02</div>
+        <h4>動画編集委託</h4>
+        <p>AI活用による委託・効率化の仕組みを構築。台本作成代行に絞り込み済み。</p>
+        <a href="video-edit.html">詳しく見る →</a>
+      </div>
+      <div class="proof-card">
+        <div class="proof-num">03</div>
+        <h4>ブランドサイト</h4>
+        <p>このサイト自体もAIで企画・構築し公開中。</p>
+        <a href="index.html">トップページへ →</a>
+      </div>
+    </div>
+
+    <p class="proof-quote">野球で育ち、専門知識ゼロからAIで事業を構築してきた経験。「元選手だからこそ分かる現場の困りごと」と「AIで実際に仕組みを作った実績」、その両方を持って提案します。</p>
+  </div>
+
+  <!-- 進め方 -->
+  <div class="section">
+    <div class="section-head">
+      <span class="section-num">04</span>
+      <h2>進め方</h2>
+    </div>
+    <p class="section-desc">まずは1つのチームで小さく試し、効果を確認しながら形にしていく。</p>
+
+    <div class="step-grid">
+      <div class="step-card">
+        <div class="step-badge">1</div>
+        <h4>ヒアリング</h4>
+        <p>チームの現状や困りごと(練習・連絡・データ管理など)を伺う。</p>
+      </div>
+      <div class="step-card">
+        <div class="step-badge">2</div>
+        <h4>お試し導入</h4>
+        <p>4つの軸の中から、一番効果を感じやすいものを1つ選んで試験導入。</p>
+      </div>
+      <div class="step-card">
+        <div class="step-badge">3</div>
+        <h4>継続・拡張</h4>
+        <p>効果を見ながら、対応範囲を広げていく。価格・体制はチームに合わせて相談。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 問い合わせ -->
+  <div class="section">
+    <div class="section-head">
+      <span class="section-num">05</span>
+      <h2>提案している人</h2>
+    </div>
+    <div class="contact-box">
+      <div class="contact-photo">タ</div>
+      <div class="contact-names">
+        <b>タイガ | 野球からAIへ</b><br>
+        連絡先: tanamatuku0512@icloud.com
+      </div>
+    </div>
+  </div>
+
+  <!-- FINAL CTA -->
+  <div class="cta-final">
+    <a class="buy-btn" href="mailto:tanamatuku0512@icloud.com">導入について相談する</a>
+    <div class="note">価格・提供形態は個別にご相談の上で決めていきます</div>
+  </div>
+
+</div>
+
+</body>
+</html>
